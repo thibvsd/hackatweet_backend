@@ -1,4 +1,4 @@
-require("../models/connection");
+require("./models/connection");
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
