@@ -21,8 +21,10 @@ router.post("/tweet", (req, res) => {
   });
 });
 
-router.post("/like", (req, res) => {
-  Tweet.updateOne({})
+router.post("/like/:idUser/:idTweet", (req, res) => {
+  Tweet.updateOne({_id: req.params.idTweet},
+    {$addToSet: {like: req.params.idUser}}
+    )
 });
 
 module.exports = router;
