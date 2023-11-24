@@ -12,7 +12,7 @@ router.post("/tweet", (req, res) => {
     req.body.content === "" ||
     !req.body.content
   )
-  return res.json({ result: false, error: "Missing or empty fields" });
+  return res.json({ result: false, content: req.body.content, error: "Missing or empty fields" });
 
   const newTweet = new Tweet({
     content: req.body.content,
