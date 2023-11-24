@@ -12,7 +12,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/signup", (req, res) => {
-  if (!checkBody(req.body, ["username", "password"])) {
+  if (!checkBody(req.body, ["name", "username", "password"])) {
     res.json({ result: false, error: "Missing or empty fields" });
     return;
   }
@@ -54,10 +54,10 @@ router.post("/signin", (req, res) => {
   });
 });
 
-router.get("/canBookmark/:token", (req, res) => {
+router.get("/canLike/:token", (req, res) => {
   User.findOne({ token: req.params.token }).then((data) => {
     if (data) {
-      res.json({ result: true, canBookmark: data.canBookmark });
+      res.json({ result: true, canLike: data.canLike });
     } else {
       res.json({ result: false, error: "User not found" });
     }

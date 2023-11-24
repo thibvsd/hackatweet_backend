@@ -12,7 +12,7 @@ router.post("/tweet", (req, res) => {
     req.body.content === "" ||
     !req.body.content
   )
-  return res.json({ result: false, content: req.body.content, error: "Missing or empty fields" });
+  return res.json({ result: false, error: "Missing or empty fields" });
 
   const newTweet = new Tweet({
     content: req.body.content,
@@ -27,6 +27,14 @@ router.post("/tweet", (req, res) => {
 router.get("/tweet", (req, res) => {
   Tweet.find().then(data => {
     const contentTweet = data.map(tweet => tweet.content);
+    res.json({ result: true, content: contentTweet });
+  });
+});
+
+
+router.get("/alltweet", (req, res) => {
+  Tweet.find().then(data => {
+    const contentTweet = data.map(tweet => tweet);
     res.json({ result: true, content: contentTweet });
   });
 });
