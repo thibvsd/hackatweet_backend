@@ -24,6 +24,13 @@ router.post("/tweet", (req, res) => {
   });
 });
 
+router.get("/tweet", (req, res) => {
+  Tweet.find().then(data => {
+    const contentTweet = data.map(tweet => tweet.content);
+    res.json({ result: true, content: contentTweet });
+  });
+});
+
 router.post("/like/:idUser/:idTweet", (req, res) => {
   Tweet.updateOne({_id: req.params.idTweet},
     {$addToSet: {like: req.params.idUser}}
