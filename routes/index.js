@@ -8,12 +8,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post("/tweet", (req, res) => {
-  if (!checkBody(req.body, ["content"])) {
-    res.json({ result: false, error: "Missing or empty fields" });
-    return;
-  }
+  if (
+    req.body.content === "" ||
+    !req.body.content
+  )
+  return res.json({ result: false, error: "Missing or empty fields" });
+
   const newTweet = new Tweet({
     content: req.body.content,
+    likes: [],
   });
 
   newTweet.save().then(() => {
